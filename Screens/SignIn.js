@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useRef} from 'react';
 import {
   View,
   TouchableOpacity,
@@ -19,6 +19,8 @@ const HEIGHT = Dimensions.get('screen').height;
 const WIDTH = Dimensions.get('screen').width;
 
 const SignIn = (props) => {
+  const _refUsername=useRef();
+  const _refPassword=useRef();
 
   const [showPas,setShowPass]=useState(true)
   const [authData, setAuthData] = useState({
@@ -96,18 +98,27 @@ const SignIn = (props) => {
           <Text style={styles.hopeLabel}> Hope you enjoy the stay! </Text>
         </View>
         <TextInput
+        ref={_refUsername}
+        autoFocus={true}
           value={authData.email}
+          blurOnSubmit={true}
+          returnKeyType='next'
           onChangeText={(txt) => changeHandler('email', txt)}
           style={emailValidator(authData.email) || authData.email.length===0?styles.usernameText:[styles.usernameText,{borderColor:'red'}]}
           placeholder="Username or Email"
+          onSubmitEditing={() => _refPassword.current.focus()}
         />
         <View style={{flexDirection:'row'}}>
         <TextInput
+        ref={_refPassword}
+        blurOnSubmit={true}
           value={authData.password}
+          returnKeyType='next'
           secureTextEntry={showPas}
           onChangeText={(txt) => changeHandler('password', txt)}
           style={styles.passwordText}
           placeholder="Password"
+          onSubmitEditing={()=>Keyboard.dismiss()}
         />
         <TouchableOpacity 
         onPress={()=>setShowPass(oldFlag=>!oldFlag)}
@@ -131,11 +142,10 @@ const SignIn = (props) => {
         </TouchableOpacity>
 
         <TouchableOpacity
-          disabled={false}
           onPress={() => btnSignInHandler()}
           style={{
             backgroundColor: '#19A5D3',
-            width: '100%',
+            width: wp('90%'),
             justifyContent: 'center',
             height: hp('6%'),
             borderRadius: Font.radius,
@@ -151,7 +161,7 @@ const SignIn = (props) => {
           onPress={() => props.navigation.navigate('SignUp')}
           style={{
             backgroundColor: 'black',
-            width: '100%',
+            width: wp('90%'),
             justifyContent: 'center',
             height: hp('6%'),
             borderRadius: Font.radius,
@@ -173,12 +183,12 @@ export default SignIn;
 const styles = StyleSheet.create({
 
   termsLabel: {
-    width: '100%',
+    width: wp('90%'),
     marginTop: hp('5%'),
     textAlign: 'center',
   },
   accLabel: {
-    width: '100%',
+    width: wp('90%'),
     marginVertical: hp('2%'),
     textAlign: 'center',
   },
@@ -188,7 +198,7 @@ const styles = StyleSheet.create({
     marginVertical:hp('2%')
   },
   usernameText: {
-    width: '100%',
+    width: wp('90%'),
     height: Font.btnHeight,
     marginVertical: hp('2%'),
     borderRadius: Font.radius,
@@ -197,7 +207,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: wp('5%'),
   },
   passwordText: {
-    width: '100%',
+    width: wp('90%'),
     height: Font.btnHeight,
     marginVertical: hp('1%'),
     borderRadius: Font.radius,
@@ -208,7 +218,7 @@ const styles = StyleSheet.create({
   },
   welcomeLabel: {
     fontFamily: 'Noto Sans',
-    width: '100%',
+    // width: wp('100%'),
     marginTop: hp('1%'),
     textAlign: 'center',
     fontSize: wp('10%'),
@@ -216,7 +226,7 @@ const styles = StyleSheet.create({
   },
   hopeLabel: {
     fontFamily: 'Noto Sans',
-    width: '100%',
+    // width: wp('100%'),
     marginTop: hp('1%'),
     textAlign: 'center',
     fontSize: wp('5%'),

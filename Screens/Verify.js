@@ -8,15 +8,19 @@ import {
   Image,
   TouchableOpacity
 } from 'react-native';
-
+import Font from '../constant/Font';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 
 const Verify = (props) => {
   return (
-    <View style={{flex: 1, paddingHorizontal: 20}}>
+    <View style={{flex: 1, paddingHorizontal: wp('2%')}}>
       <View
         style={{flex: 0.1,  justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>{`<`}</Text>
+          <Text style={{fontSize: hp('3%'), fontWeight: 'bold'}}>{`<`}</Text>
         </TouchableOpacity>
       </View>
 
@@ -24,7 +28,7 @@ const Verify = (props) => {
           <Image
           resizeMode='cover'
           source={{uri:'https://www.th-wildau.de/files/_processed_/f/a/csm_Email_01_42a7aaf613.png'}}
-          style={{height:80,width:100,alignSelf:'center'}}
+          style={{height:hp('10%'),width:wp('20%'),alignSelf:'center'}}
           />
         <Text style={styles.enterLabel}>Verification Code Send to Email</Text>
         <Text style={styles.detLabel}>
@@ -45,15 +49,16 @@ const Verify = (props) => {
         disabled={false}
         onPress={() => props.navigation.navigate('NewPass')}
         style={{
-          backgroundColor: '#19A5D3',
-          width: '100%',
+          backgroundColor: Font.bdrColor,
+          width: wp('90%'),
           justifyContent:'center',
-          height:60,
-          borderRadius: 8,
-          marginTop: 10,
+          height:Font.btnHeight,
+          borderRadius: Font.radius,
+          marginTop: hp('1%'),
           alignSelf: 'center',
         }}>
-          <Text style={{color: '#fff', textAlign: 'center',fontSize:18,fontWeight:'bold'}}>Verify</Text>
+          <Text style={{color: '#fff', textAlign: 'center',
+                  fontSize:Font.btnFontSize,fontWeight:'bold'}}>Verify</Text>
       </TouchableOpacity>
       </View>
       <View style={{flex: 0.15, justifyContent: 'center'}}>
@@ -61,16 +66,16 @@ const Verify = (props) => {
         disabled={false}
         onPress={() => alert('Ms Saira')}
         style={{
-          borderColor: '#19A5D3',
-          width: '100%',
+          borderColor: Font.bdrColor,
+          width: wp('90%'),
           justifyContent:'center',
-          height:60,
-          borderRadius: 8,
-          marginTop: 10,
-          borderWidth:1,
+          height:Font.btnHeight,
+          borderRadius: Font.radius,
+          marginTop: hp('1%'),
+          borderWidth: wp('0.5%'),
           alignSelf: 'center',
         }}>
-          <Text style={{color: '#19A5D3', textAlign: 'center',fontSize:18,fontWeight:'bold'}}>Resend Code</Text>
+          <Text style={{color: Font.bdrColor, textAlign: 'center',fontSize:Font.btnFontSize,fontWeight:'bold'}}>Resend Code</Text>
       </TouchableOpacity>
       </View>
     </View>
@@ -81,31 +86,29 @@ export default Verify;
 const styles = StyleSheet.create({
 
   emailText: {
-    width: '15%',
-    height: 60,
+    width: wp('15%'),
+    height: wp('15%'),
     textAlign:'center',
-    marginTop: 10,
-    paddingLeft:10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    marginTop: hp('1%'),
+    paddingLeft: wp('1%'),
+    borderRadius: wp('2%'),
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.1%'),
   },
   enterLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    marginTop: 40,
+    marginTop: hp('4%'),
     textAlign: 'center',
-    fontSize: 22,
+    fontSize: wp('5%'),
     color: 'black',
   },
   detLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    lineHeight:30,
-    marginTop: 30,
-    marginHorizontal:'10%',
+    lineHeight: hp('3%'),
+    marginTop: hp('3%'),
+    marginHorizontal: wp('10%'),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: wp('4%'),
     color: 'black',
   },
 });

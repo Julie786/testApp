@@ -10,6 +10,6 @@ export default{
   fontColor: '#000',
   bdrColor: '#19A5D3',
   bdrWidth: hp('0.1%'),
-  btnFontSize:wp('3%'),
-  inputFontSize:wp('2%')
+  btnFontSize:wp('4%'),
+  inputFontSize:wp('4%')
 };

@@ -7,8 +7,12 @@ import {
   Keyboard,
   TouchableOpacity
 } from 'react-native';
+import Font from '../constant/Font';
 
-
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 const ForgotPassword = (props) => {
   console.log(props.route.params.name);
   return (
@@ -16,7 +20,9 @@ const ForgotPassword = (props) => {
       <View
         style={{flex: 0.1,  justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>{`<`}</Text>
+          <Text style={{color: '#000',
+                fontSize: wp('7%'),
+                fontWeight: 'bold',}}>{`<`}</Text>
         </TouchableOpacity>
       </View>
 
@@ -29,22 +35,22 @@ const ForgotPassword = (props) => {
       </View>
 
       <View style={{flex: 0.2, justifyContent: 'center'}}>
-        <TextInput style={styles.emailText} placeholder="Email" />
+        <TextInput autoFocus={true} style={styles.emailText} placeholder="Email" />
       </View>
       <View style={{flex: 0.2, justifyContent: 'center'}}>
         <TouchableOpacity
         disabled={false}
         onPress={() => props.navigation.navigate('Verify')}
         style={{
-          backgroundColor: '#19A5D3',
-          width: '100%',
+          backgroundColor: Font.bdrColor,
+          width: wp('90%'),
           justifyContent:'center',
-          height:60,
-          borderRadius: 8,
-          marginTop: 10,
+          height: Font.inputHeight,
+          borderRadius: Font.radius,
+          marginTop: hp('1%'),
           alignSelf: 'center',
         }}>
-          <Text style={{color: '#fff', textAlign: 'center',fontWeight:'bold'}}>Continue</Text>
+          <Text style={{color: '#fff', textAlign: 'center',fontWeight:'bold',fontSize:Font.btnFontSize}}>Continue</Text>
       </TouchableOpacity>
       </View>
     </View>
@@ -55,30 +61,28 @@ export default ForgotPassword;
 const styles = StyleSheet.create({
 
   emailText: {
-    width: '100%',
-    height: 60,
-    marginTop: 10,
-    paddingLeft:10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    width: wp('90%'),
+    height: Font.inputHeight,
+    borderRadius: Font.radius,
+    marginTop: hp('1%'),
+    paddingLeft:wp('5%'),
+    fontSize:Font.inputFontSize,
+    borderColor: Font.bdrColor,
+    borderWidth: hp('0.1%'),
   },
   enterLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    marginTop: 40,
+    paddingVertical:hp('5%'),
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: wp('10%'),
     color: 'black',
   },
   detLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    lineHeight:30,
-    marginTop: 30,
-    marginHorizontal:'10%',
+    lineHeight:hp('3%'),
+    marginHorizontal:wp('10%'),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: wp('4%'),
     color: 'black',
   },
 });

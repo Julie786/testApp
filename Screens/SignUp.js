@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   View,
   StyleSheet,
@@ -10,7 +10,22 @@ import {
 } from 'react-native';
 import DateTimePicker from 'react-native-modal-datetime-picker';
 
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
+import Font from '../constant/Font';
+
 const SignUp = (props) => {
+  const _refFname = useRef();
+  const _refLastName = useRef();
+  const _refEmail = useRef();
+  const _refGender = useRef();
+  const _refDob = useRef();
+  const _refCountry = useRef();
+  const _refPassword = useRef();
+  const _refReEnterPassword = useRef();
+
   const [openDateModal, setOpenDateModal] = useState(false);
   const [showPas, setShowPass] = useState(true);
   const [showRePas, setShowRePass] = useState(true);
@@ -30,7 +45,6 @@ const SignUp = (props) => {
   };
   console.log(authData);
   const errorHandler = () => {
-    
     const regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     var patt = new RegExp(regex);
     if (!authData.firstName || !authData.lastName) {
@@ -64,12 +78,16 @@ const SignUp = (props) => {
         message: 'Oops it seems your email is not correct',
         status: false,
       };
-    } else if (!authData.password ||authData.password.length < 8 ||authData.password.length > 12) {
+    } else if (
+      !authData.password ||
+      authData.password.length < 8 ||
+      authData.password.length > 12
+    ) {
       return {
         message: 'Oops it seems you forget to enter password',
         status: false,
       };
-    } else if (authData.reEnterPassword !== authData.password ) {
+    } else if (authData.reEnterPassword !== authData.password) {
       return {
         message: 'Oops it seems you enter the re-password is not corerct',
         status: false,
@@ -99,8 +117,8 @@ const SignUp = (props) => {
     <View
       style={{
         flex: 1,
-        paddingHorizontal: 20,
-        paddingBottom: 20,
+        paddingHorizontal: hp('2%'),
+        paddingBottom: hp('2%'),
         backgroundColor: '#cecece',
       }}>
       <DateTimePicker
@@ -113,6 +131,7 @@ const SignUp = (props) => {
         onConfirm={(date) => {
           setOpenDateModal(false);
           setAuthData({...authData, dob: new Date(date).toLocaleDateString()});
+          // _refGender.current.f
         }}
       />
       <TouchableOpacity
@@ -134,14 +153,23 @@ const SignUp = (props) => {
           alignItems: 'center',
         }}>
         <TextInput
+          ref={_refFname}
+          autFocus={true}
           style={styles.nameText}
           placeholder="First Name*"
+          returnKeyType='next'
           onChangeText={(txt) => changeHandler('firstName', txt)}
+          onSubmitEditing={() => _refLastName.current.focus()}
+          blurOnSubmit={true}
         />
         <TextInput
+        ref={_refLastName}
           style={styles.nameText}
           placeholder="Last Name*"
+          returnKeyType='next'
           onChangeText={(txt) => changeHandler('lastName', txt)}
+          onSubmitEditing={() => setOpenDateModal(true)}
+          blurOnSubmit={true}
         />
       </View>
       <View
@@ -151,19 +179,20 @@ const SignUp = (props) => {
           alignItems: 'center',
         }}>
         <View style={styles.dobText}>
-          <TouchableOpacity onPress={() => setOpenDateModal(true)}
+          <TouchableOpacity
+            onPress={() => setOpenDateModal(true)}
             style={{
               width: '80%',
               height: '100%',
               justifyContent: 'space-between',
               alignItems: 'center',
-              borderRadius: 8,
+              borderRadius: Font.radius,
               marginLeft: 5,
               alignSelf: 'flex-start',
               flexDirection: 'row',
             }}>
             <Text>{authData.dob ? authData.dob : `DOB`}</Text>
-            <View >
+            <View>
               <Image
                 style={{width: 20, height: 20}}
                 resizeMode="contain"
@@ -216,8 +245,10 @@ const SignUp = (props) => {
             borderColor: '#19A5D3',
             marginLeft: 10,
           }}
-          onValueChange={(itemValue, itemIndex) =>
+          onValueChange={(itemValue, itemIndex) =>{
             changeHandler('country', itemValue)
+            _refEmail.current.focus()
+          }
           }>
           <Picker.Item label="Country" value="country" />
           <Picker.Item label="Afghanistan" value="Afghan" />
@@ -227,15 +258,23 @@ const SignUp = (props) => {
         </Picker>
       </View>
       <TextInput
+      ref={_refEmail}
         style={styles.emailText}
         placeholder="Email*"
+          onSubmitEditing={() => _refPassword.current.focus()}
+          blurOnSubmit={true}
+          returnKeyType='next'
         onChangeText={(txt) => changeHandler('email', txt)}
       />
 
       <View style={{marginVertical: 10}}>
         <TextInput
+        ref={_refPassword}
           style={[styles.passwordText, {paddingRight: 45}]}
           secureTextEntry={showPas}
+           onSubmitEditing={() => _refReEnterPassword.current.focus()}
+          blurOnSubmit={true}
+          returnKeyType='next'
           placeholder="Password*"
           value={authData.password}
           onChangeText={(txt) => changeHandler('password', txt)}
@@ -259,6 +298,7 @@ const SignUp = (props) => {
       </Text>
       <View style={{flexDirection: 'row'}}>
         <TextInput
+        ref={_refReEnterPassword}
           secureTextEntry={showRePas}
           style={[styles.passwordText, {paddingRight: 45}]}
           placeholder="Re-enter Password*"
@@ -284,8 +324,6 @@ const SignUp = (props) => {
         style={{
           backgroundColor: '#19A5D3',
           width: '100%',
-          //  paddingVertical: 13,
-          //  paddingHorizontal:
           justifyContent: 'center',
           height: 50,
           borderRadius: 8,
@@ -322,8 +360,6 @@ const styles = StyleSheet.create({
     height: 60,
     justifyContent: 'center',
     marginTop: 10,
-    // marginLeft: 10,
-    // marginRight: 10,
     borderRadius: 8,
     borderColor: '#19A5D3',
     borderWidth: 1,
@@ -333,8 +369,6 @@ const styles = StyleSheet.create({
     width: '48%',
     height: 60,
     marginTop: 10,
-    // marginLeft: 10,
-    // marginRight: 10,
     borderRadius: 8,
     borderColor: '#19A5D3',
     borderWidth: 1,
@@ -345,8 +379,6 @@ const styles = StyleSheet.create({
     width: '48%',
     height: 60,
     marginTop: 10,
-    // marginLeft: 10,
-    // marginRight: 10,
     borderRadius: 8,
     borderColor: '#19A5D3',
     borderWidth: 1,
@@ -357,7 +389,7 @@ const styles = StyleSheet.create({
     height: 60,
     marginTop: 10,
     paddingLeft: 10,
-    paddingRight:10,
+    paddingRight: 10,
     marginRight: 10,
     borderRadius: 8,
     borderColor: '#19A5D3',

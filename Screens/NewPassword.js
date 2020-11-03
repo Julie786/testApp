@@ -8,13 +8,17 @@ import {
   Keyboard,
   TouchableOpacity,
 } from 'react-native';
-
+import Font from '../constant/Font';
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from 'react-native-responsive-screen';
 const NewPassword = (props) => {
   return (
-    <View style={{flex: 1, paddingHorizontal: 20}}>
+    <View style={{flex: 1, paddingHorizontal: wp('2%')}}>
       <View style={{flex: 0.1, justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Text style={{fontSize: 30, fontWeight: 'bold'}}>{`<`}</Text>
+          <Text style={{fontSize: wp('3%'), fontWeight: 'bold'}}>{`<`}</Text>
         </TouchableOpacity>
       </View>
 
@@ -26,7 +30,7 @@ const NewPassword = (props) => {
         </Text>
       </View>
 
-     <View style={{flex:0.3}}>
+     <View style={{flex:0.3,alignSelf:'center'}}>
      <TextInput style={styles.newPasswordText} placeholder="New Password" />
       <TextInput
         style={styles.newPasswordText}
@@ -38,12 +42,12 @@ const NewPassword = (props) => {
         disabled={false}
         onPress={() => props.navigation.popToTop()}
         style={{
-          backgroundColor: '#19A5D3',
-          width: '100%',
+          backgroundColor: Font.bdrColor,
+          width: wp('90%'),
           justifyContent:'center',
-          height:60,
-          borderRadius: 8,
-          marginTop: 10,
+          height:Font.btnHeight,
+          borderRadius: Font.radius,
+          marginTop: hp('1%'),
           alignSelf: 'center',
         }}>
           <Text style={{color: '#fff', textAlign: 'center',fontWeight:'bold'}}>Save</Text>
@@ -55,39 +59,29 @@ const NewPassword = (props) => {
 export default NewPassword;
 
 const styles = StyleSheet.create({
-  btnSave: {
-    alignContent: 'center',
-    backgroundColor: 'blue',
-    width: '80%',
-    height: 53,
-    marginTop: 15,
-    marginLeft: 20,
-    borderRadius: 8,
-  },
+
   newPasswordText: {
-    width: '100%',
-    height: 60,
-    marginTop: 30,
-    paddingLeft:10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    width: wp('90%'),
+    height: Font.inputHeight,
+    marginTop: hp('3%'),
+    paddingLeft: wp('1%'),
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: Font.bdrWidth,
   },
   enterLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    marginTop: 40,
+    marginTop: hp('4%'),
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: wp('5%'),
     color: '#000',
   },
   detLabel: {
     fontFamily: 'Noto Sans',
-    // width: '60%',
-    marginTop: 30,
-    paddingHorizontal:'10%',
+    marginTop: hp('3'),
+    paddingHorizontal: wp('10%'),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: wp('4%'),
     color: '#000',
   },
 });

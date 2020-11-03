@@ -131,7 +131,6 @@ const SignUp = (props) => {
         onConfirm={(date) => {
           setOpenDateModal(false);
           setAuthData({...authData, dob: new Date(date).toLocaleDateString()});
-          // _refGender.current.f
         }}
       />
       <TouchableOpacity
@@ -140,7 +139,7 @@ const SignUp = (props) => {
         <Text style={{fontSize: 30, fontWeight: 'bold'}}>{`<`}</Text>
       </TouchableOpacity>
       <View
-        style={{alignSelf: 'center', justifyContent: 'center', height: 150}}>
+        style={{alignSelf: 'center', justifyContent: 'center', height: hp('12%')}}>
         <Text style={styles.enterLabel}> Hello!</Text>
         <Text style={styles.detLabel}>
           Get started in few seconds for free{' '}
@@ -151,6 +150,7 @@ const SignUp = (props) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          width: wp('90%')
         }}>
         <TextInput
           ref={_refFname}
@@ -177,24 +177,25 @@ const SignUp = (props) => {
           flexDirection: 'row',
           justifyContent: 'space-between',
           alignItems: 'center',
+          width: wp('90%')
         }}>
         <View style={styles.dobText}>
           <TouchableOpacity
             onPress={() => setOpenDateModal(true)}
             style={{
-              width: '80%',
-              height: '100%',
+              width: wp('37%'),
+              height: hp('100%'),
               justifyContent: 'space-between',
               alignItems: 'center',
               borderRadius: Font.radius,
-              marginLeft: 5,
+              marginLeft: wp('0.5%'),
               alignSelf: 'flex-start',
               flexDirection: 'row',
             }}>
             <Text>{authData.dob ? authData.dob : `DOB`}</Text>
             <View>
               <Image
-                style={{width: 20, height: 20}}
+                style={{width: wp('4%'), height: wp('4%')}}
                 resizeMode="contain"
                 source={require('../assets/calendarImg.png')}
               />
@@ -203,19 +204,20 @@ const SignUp = (props) => {
         </View>
         <View
           style={{
-            borderWidth: 1,
-            width: '48%',
-            marginTop: 10,
-            borderColor: '#19A5D3',
-            borderRadius: 8,
+            borderWidth: wp('0.2%'),
+            width: wp('45%'),
+            marginTop: hp('1%'),
+            borderColor: Font.bdrColor,
+            borderRadius: Font.radius,
+            justifyContent: 'space-between'
           }}>
           <Picker
             selectedValue={authData.gender}
             style={{
-              height: 60,
-              width: '100%',
+              height: hp('6%'),
+              width: wp('46%'),
               justifyContent: 'space-around',
-              borderColor: '#19A5D3',
+              borderColor: Font.bdrColor,
             }}
             onValueChange={(itemValue, itemIndex) =>
               changeHandler('gender', itemValue)
@@ -229,21 +231,21 @@ const SignUp = (props) => {
 
       <View
         style={{
-          borderWidth: 1,
-          width: '100%',
-          marginTop: 10,
-          borderColor: '#19A5D3',
-          borderRadius: 8,
+          borderWidth: wp('0.2%'),
+          width: wp('90%'),
+          marginTop: hp('1%'),
+          borderColor: Font.bdrColor,
+          borderRadius: Font.radius,
         }}>
         <Picker
           selectedValue={authData.country}
           style={{
-            height: 60,
-            width: '100%',
-            borderWidth: 1,
+            height: hp('6%'),
+            width: wp('90%'),
+            borderWidth: wp('0.2%'),
             justifyContent: 'space-around',
-            borderColor: '#19A5D3',
-            marginLeft: 10,
+            borderColor: Font.bdrColor,
+            marginLeft: wp('1%'),
           }}
           onValueChange={(itemValue, itemIndex) =>{
             changeHandler('country', itemValue)
@@ -267,10 +269,10 @@ const SignUp = (props) => {
         onChangeText={(txt) => changeHandler('email', txt)}
       />
 
-      <View style={{marginVertical: 10}}>
+      <View style={{marginVertical: hp('1%')}}>
         <TextInput
         ref={_refPassword}
-          style={[styles.passwordText, {paddingRight: 45}]}
+          style={[styles.passwordText, {paddingRight: wp('4.5%')}]}
           secureTextEntry={showPas}
            onSubmitEditing={() => _refReEnterPassword.current.focus()}
           blurOnSubmit={true}
@@ -281,18 +283,18 @@ const SignUp = (props) => {
         />
         <TouchableOpacity
           onPress={() => setShowPass((oldFlag) => !oldFlag)}
-          style={{position: 'absolute', right: 20, top: 27}}>
+          style={{position: 'absolute', right: wp('5%'), top: hp('2.3%')}}>
           <Image
             style={{
-              width: 20,
-              height: 20,
+              width: wp('4%'),
+              height: wp('4%'),
             }}
             resizeMode="contain"
             source={require('../assets/eyeImg.jpg')}
           />
         </TouchableOpacity>
       </View>
-      <Text style={{width: '80%', marginLeft: 20}}>
+      <Text style={{width: wp('90%'), marginLeft: wp('2%')}}>
         Password must be at least 8 characters long. To make it stronger, use
         upper and lower case letters, numbers and symbols
       </Text>
@@ -300,18 +302,18 @@ const SignUp = (props) => {
         <TextInput
         ref={_refReEnterPassword}
           secureTextEntry={showRePas}
-          style={[styles.passwordText, {paddingRight: 45}]}
+          style={[styles.passwordText, {paddingRight: wp('4.5%')}]}
           placeholder="Re-enter Password*"
           value={authData.reEnterPassword}
           onChangeText={(txt) => changeHandler('reEnterPassword', txt)}
         />
         <TouchableOpacity
           onPress={() => setShowRePass((oldFlag) => !oldFlag)}
-          style={{position: 'absolute', right: 20, top: 25}}>
+          style={{position: 'absolute', right: wp('5%'), top: hp('2.3%')}}>
           <Image
             style={{
-              width: 20,
-              height: 20,
+              width: wp('4%'),
+              height: wp('4%'),
             }}
             resizeMode="contain"
             source={require('../assets/eyeImg.jpg')}
@@ -322,13 +324,14 @@ const SignUp = (props) => {
         disabled={false}
         onPress={() => btnSignUpHandler()}
         style={{
-          backgroundColor: '#19A5D3',
-          width: '100%',
+          backgroundColor: Font.bdrColor,
+          width: wp('90%'),
           justifyContent: 'center',
-          height: 50,
-          borderRadius: 8,
-          marginTop: 10,
+          height: hp('6%'),
+          borderRadius: Font.radius,
+          marginTop: hp('1%'),
           alignSelf: 'center',
+          marginLeft: wp('0.1%')
         }}>
         <View>
           <Text style={{color: '#fff', textAlign: 'center'}}>NEXT</Text>
@@ -342,68 +345,71 @@ export default SignUp;
 const styles = StyleSheet.create({
   enterLabel: {
     fontFamily: 'Noto Sans',
-    height: 41,
+    height: hp('5.5%'),
     textAlign: 'center',
-    fontSize: 32,
+    fontSize: wp('10%'),
     color: 'black',
+    marginBottom: hp('1%')
   },
   detLabel: {
     fontFamily: 'Noto Sans',
-
+    marginTop: hp('1%'),
     textAlign: 'center',
-    fontSize: 18,
+    fontSize: wp('3%'),
     color: 'black',
   },
   dobText: {
-    paddingLeft: 10,
-    width: '50%',
-    height: 60,
+    paddingLeft: wp('1%'),
+    width: wp('44%'),
+    height: hp('6%'),
     justifyContent: 'center',
-    marginTop: 10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    marginTop: hp('1%'),
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.2%'),
   },
   genderPicker: {
-    paddingLeft: 10,
-    width: '48%',
-    height: 60,
-    marginTop: 10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    paddingLeft: wp('0.1%'),
+    width: wp('44%'),
+    height: hp('6%'),
+    marginTop: hp('1%'),
+    justifyContent: 'space-between',
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.2%'),
   },
   nameText: {
-    paddingLeft: 10,
-    paddingRight: 10,
-    width: '48%',
-    height: 60,
-    marginTop: 10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    paddingLeft: wp('1%'),
+    paddingRight: wp('1%'),
+    width: wp('44%'),
+    height: Font.btnHeight,
+    marginTop: hp('1%'),
+    justifyContent: 'space-between',
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.2%'),
   },
 
   emailText: {
-    width: '100%',
-    height: 60,
-    marginTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginRight: 10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    width: wp('90%'),
+    height: Font.btnHeight,
+    marginTop: wp('2%'),
+    paddingLeft: wp('1%'),
+    paddingRight: wp('1%'),
+    marginRight: wp('1%'),
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.2%'),
   },
   passwordText: {
-    width: '100%',
-    height: 60,
-    marginTop: 10,
-    paddingLeft: 10,
-    paddingRight: 10,
-    marginRight: 10,
-    borderRadius: 8,
-    borderColor: '#19A5D3',
-    borderWidth: 1,
+    width: wp('90%'),
+    height: Font.btnHeight,
+    marginTop: wp('0.6%'),
+    paddingLeft: wp('1%'),
+    paddingRight: wp('1%'),
+    marginRight: wp('1%'),
+    borderRadius: Font.radius,
+    borderColor: Font.bdrColor,
+    borderWidth: wp('0.2%'),
   },
 });

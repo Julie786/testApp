@@ -16,7 +16,7 @@ import {
 
 const Verify = (props) => {
   return (
-    <View style={{flex: 1, paddingHorizontal: wp('2%')}}>
+    <View style={{flex: 1, paddingHorizontal: wp('6%')}}>
       <View
         style={{flex: 0.1,  justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>

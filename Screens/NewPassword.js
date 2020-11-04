@@ -15,10 +15,10 @@ import {
 } from 'react-native-responsive-screen';
 const NewPassword = (props) => {
   return (
-    <View style={{flex: 1, paddingHorizontal: wp('2%')}}>
+    <View style={{flex: 1, paddingHorizontal: wp('6%')}}>
       <View style={{flex: 0.1, justifyContent: 'center'}}>
-        <TouchableOpacity onPress={() => props.navigation.pop()}>
-          <Text style={{fontSize: wp('3%'), fontWeight: 'bold'}}>{`<`}</Text>
+      <TouchableOpacity onPress={() => props.navigation.pop()}>
+          <Text style={{fontSize: hp('3%'), fontWeight: 'bold'}}>{`<`}</Text>
         </TouchableOpacity>
       </View>
 

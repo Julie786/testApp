@@ -16,7 +16,7 @@ import {
 const ForgotPassword = (props) => {
   console.log(props.route.params.name);
   return (
-    <View style={{flex: 1, paddingHorizontal: 20}}>
+    <View style={{flex: 1, paddingHorizontal: wp('6%'),alignSelf:'center'}}>
       <View
         style={{flex: 0.1,  justifyContent: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.pop()}>

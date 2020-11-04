@@ -72,8 +72,8 @@ const SignIn = (props) => {
     return true;
   }
   return (
-    <View style={{flex: 1}}>
-      <ScrollView contentContainerStyle={{paddingHorizontal: 20}}>
+    <View style={{flex: 1,alignSelf:'center'}}>
+      <ScrollView contentContainerStyle={{paddingHorizontal: wp('6%')}}>
         <TouchableOpacity
           disabled={false}
           onPress={() => alert('Ms Saira')}
@@ -108,7 +108,7 @@ const SignIn = (props) => {
           placeholder="Username or Email"
           onSubmitEditing={() => _refPassword.current.focus()}
         />
-        <View style={{flexDirection:'row'}}>
+        <View style={{}}>
         <TextInput
         ref={_refPassword}
         blurOnSubmit={true}
@@ -123,7 +123,7 @@ const SignIn = (props) => {
         <TouchableOpacity 
         onPress={()=>setShowPass(oldFlag=>!oldFlag)}
         style={{position: 'absolute',
-            right: wp('5%'),
+            right: wp('3%'),
             top: hp('2%'),}}>
         <Image
           style={{
@@ -205,6 +205,7 @@ const styles = StyleSheet.create({
     borderColor: Font.bdrColor,
     borderWidth:Font.bdrWidth,
     paddingHorizontal: wp('5%'),
+    alignSelf:'center'
   },
   passwordText: {
     width: wp('90%'),
@@ -214,7 +215,8 @@ const styles = StyleSheet.create({
     borderColor: Font.bdrColor,
     borderWidth:Font.bdrWidth,
     paddingLeft: wp('5%'),
-    paddingRight: wp('20%')
+    paddingRight: wp('20%'),
+    alignSelf:'center'
   },
   welcomeLabel: {
     fontFamily: 'Noto Sans',
